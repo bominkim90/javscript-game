@@ -1,0 +1,107 @@
+✅ 모듈 불러오기
+모듈을 불러오고 입출력을 설정하는 인터페이스를 생성
+
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin, // 표준 입력 스트림
+    output: process.stdout // 표준 출력 스트림
+});
+✏️ 한 줄 입력받기
+정수 하나를 입력받아 출력하기
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question('숫자를 입력하세요: ', (answer) => {
+    // 입력받은 값을 숫자로 변환
+    const number = parseInt(answer, 10);
+
+    // 변환된 숫자를 콘솔에 출력
+    console.log('입력한 숫자:', number);
+
+    // 입력 인터페이스 닫기
+    rl.close();
+});
+기본 한 줄 입력받기
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.on("line", (line) => {
+    // 한 줄씩 입력받은 후 실행할 코드
+    // 입력된 값은 line에 저장된다.
+    rl.close(); // 필수!! close가 없으면 입력을 무한히 받는다.
+});
+rl.on('close', () => {
+    // 입력이 끝난 후 실행할 코드
+        process.exit();
+})
+공백을 기준으로 값을 한줄로 입력받기
+let input = []
+rl.on("line", (line) => {
+    // 공백을 기준으로 
+    input = line.split(' '); 
+    rl.close();
+});
+ 
+rl.on('close', () => {
+    input.forEach(el => {
+        console.log(el);
+    })
+    process.exit();
+})
+//입력
+1 2 3 4 5
+
+//출력
+1
+2
+3
+4
+5
+✏️ 여러 줄 입력받기
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let input = [];
+rl.on("line", (line) => {
+  input.push(line);
+  // 받은 input 값인 line을 input 배열에 넣어줌
+});
+
+rl.on("close", () => {
+  console.log(input); // input 배열 산출
+  input.map((v) => console.log(v)); // input배열 하나씩 행마다 출력 
+  process.exit();
+});
+//입력
+123
+1 2 3
+4
+5
+(control +c 눌러야 종료됨)
+
+//출력
+[ '123', '1 2 3', '4', '5' ]
+123
+1 2 3
+4
+5
+✅ 유용한 함수
+공백으로 구분된 숫자들을 정수 배열로 변환
+rl.on('line', (line) => {
+    // 공백으로 구분된 숫자들을 배열로 변환
+    const numbers = line.split(' ').map(Number);
+  ...
+}
