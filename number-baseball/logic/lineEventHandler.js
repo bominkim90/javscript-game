@@ -10,32 +10,31 @@ const printLog = require('./printLog')
 
 
 // 매 단계 종료 시 => 콘솔입력값으로 분기처리
-function mainMenu(line) { 
-  if (line == 1) {
-    console.log("컴퓨터에게 승리하기 위해 몇번만에 성공해야 하나요?");
-    initLineListener(setMaxAttempts) // 최대 시도 횟수 설정
-    return
+function mainMenu(line) {
+  switch ( parseInt(line) ) {
+    case 1 :
+      console.log("컴퓨터에게 승리하기 위해 몇번만에 성공해야 하나요?")
+      initLineListener(setMaxAttempts)
+      break
+    case 2 :
+      if (gameRecordsArr.length == 0) {
+        console.log("저장된 게임 기록이 없습니다.")
+        printLog.printMenu()
+        break
+      }
+      showGameRecords()
+      initLineListener(gameDetails)
+      break
+    case 3 :
+      viewStatistics()
+      break
+    case 9 :
+      exitGame()
+      break
+  
+    default:
+    printLog.printMenu()
   }
-  if (line == 2) {
-    if (gameRecordsArr.length == 0) {
-      console.log("저장된 게임 기록이 없습니다.");
-      printLog.printMenu();
-      return;
-    }
-    showGameRecords();
-    initLineListener(gameDetails);
-    return
-  }
-  if (line == 3) { // 3단계 : 게임 통계 기능 추가
-    viewStatistics();
-    return
-  }
-  if(line == 9) {
-    exitGame();
-    return
-  }
-
-  printLog.printMenu();
 }
 
 
@@ -101,8 +100,6 @@ function initLineListener(callback){
   readlineInterface.removeAllListeners("line");
   readlineInterface.on("line",callback);
 }
-
-
 
 
 module.exports = {

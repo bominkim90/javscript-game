@@ -15,14 +15,11 @@ function viewStatistics()
   const shortestCount = [Math.max(...tryCountArr), tryCountArr.indexOf(Math.max(...tryCountArr))+1];
   const longestCount = [Math.min(...tryCountArr), tryCountArr.indexOf(Math.min(...tryCountArr))+1];
   
-  let [컴퓨터wins, 사용자wins] = [0, 0];
-  gameRecordsArr.forEach( value => { value.승리자 == "컴퓨터" ? 컴퓨터wins++ : 사용자wins++ });
-  // let [컴퓨터wins, 사용자wins] = [
-    //   gameRecordsArr.reduce( (누적값, 현재값) => {return 누적값 + (현재값.승리자 == "컴퓨터" ? 1 : 0)}, 0),
-    //   gameRecordsArr.reduce( (누적값, 현재값) => {return 누적값 + (현재값.승리자 == "사용자" ? 1 : 0)}, 0),
-    // ]
-    console.log("컴퓨터wins : ", 컴퓨터wins);
-    console.log("사용자wins : ", 사용자wins);
+  let [comWins, userWins] = [0, 0];
+  gameRecordsArr.forEach( value => { value.승리자 == "컴퓨터" ? comWins++ : userWins++ });
+
+    console.log("comWins : ", comWins);
+    console.log("userWins : ", userWins);
     const maxAttemptsArr = gameRecordsArr.map( value => value.최대시도횟수 );
     const [mostAttempts, leastAttempts] = [ Math.max(...maxAttemptsArr), Math.min(...maxAttemptsArr) ]
     const averageTryCount = (Math.floor( (tryCountArr.reduce( (이전값, 현재값) => {return 이전값 + 현재값}, 0) / tryCountArr.length) *10)/10)
@@ -33,8 +30,8 @@ function viewStatistics()
   가장 많이 적용된 승리/패배 횟수: ${mostAttempts}
   가장 적게 적용된 승리/패배 횟수: ${leastAttempts}
   적용된 승리/패배 횟수 평균: ${averageTryCount}회
-  컴퓨터 전적: ${컴퓨터wins}승 / ${사용자wins}패 / ${Math.floor(컴퓨터wins/(컴퓨터wins+사용자wins) * 100)}%
-  사용자 전적: ${사용자wins}승 / ${컴퓨터wins}패 / ${Math.floor(사용자wins/(컴퓨터wins+사용자wins) * 100)}%\n
+  컴퓨터 전적: ${comWins}승 / ${userWins}패 / ${Math.floor(comWins/(comWins+userWins) * 100)}%
+  사용자 전적: ${userWins}승 / ${comWins}패 / ${Math.floor(userWins/(comWins+userWins) * 100)}%\n
   --------통계 종료-------\n
   게임을 새로 시작하려면 1, 기록을 보려면 2, 통계를 보려면 3, 게임을 종료하려면 9을 입력하세요.`;
   console.log(text);

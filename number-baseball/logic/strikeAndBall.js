@@ -5,7 +5,7 @@ const gameRecordsArr = require('../data/gameRecordsArr');
 function strikeAndBall(humanNumbers)
 {
   let [strike, ball] = [0, 0];
-  gameRecordsArr.computerNumbers.forEach((computerEachNumber, computerEachIndex) => {
+  Array.from(gameRecordsArr.computerNumbers).forEach((computerEachNumber, computerEachIndex) => {
     humanNumbers.forEach((humanEachNumber, humanEachIndex) => {
       if (computerEachNumber == humanEachNumber) {
         if (computerEachIndex == humanEachIndex) return strike++;
